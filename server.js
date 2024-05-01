@@ -4,8 +4,8 @@ const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
 const connectDB = require("./config/db");
-//dot config
-const path=("path")
+const path = require("path"); // Require the 'path' module here
+
 dotenv.config();
 
 //mongodb connection
@@ -27,11 +27,13 @@ app.use("/api/v1/inventory", require("./routes/inventoryRoutes"));
 app.use("/api/v1/analytics", require("./routes/analyticsRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 
-app.use(express.static(path.join(__dirname,'./client/build')))
+app.use(express.static(path.join(__dirname,'./client/build')));
+
 //port
 app.get('*',function (req,res) {
-  res.send(path.join(__dirname,"./client/build/index.html"))
-})
+  res.sendFile(path.join(__dirname,"./client/build/index.html"));
+});
+
 const PORT = process.env.PORT || 8080;
 
 //listen
